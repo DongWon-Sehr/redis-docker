@@ -1,0 +1,30 @@
+version: "3.8"
+
+### Service setting #########################################
+services:
+  redis-prod-master:
+    # image: redis:6.2.1-alpine
+    container_name: cache
+    hostname: redis-prod-master
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      # args:
+      #   REDIS_AUTH: root
+    ports:
+      - ${REDIS_BINDING_PORT}:${REDIS_PORT}
+    command: redis-server /etc/redis/redis.conf
+    volumes: 
+      - ${REDIS_DATA_PATH}:/data
+      - ${REDIS_DEFAULT_CONFIG_FILE}:/etc/redis/redis.conf
+      - ${REDIS_LOG_PATH}:/var/log/redis/
+
+
+### Network setting #########################################
+# networks: 
+#   dock_net:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 172.16.0.0/16
