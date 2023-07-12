@@ -1,7 +1,6 @@
 FROM ubuntu:20.04
-MAINTAINER DongWon Sehr <ddoro36@gmail.com>
+MAINTAINER DongWon Sehr <dongwon.sehr@gmail.com>
 
-# Install tools
 RUN apt-get update && \
     apt-get install -y wget build-essential htop vim unzip && \
     rm -rf /var/lib/apt/lists/*
